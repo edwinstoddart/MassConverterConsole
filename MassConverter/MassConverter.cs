@@ -6,6 +6,20 @@ using System.Threading.Tasks;
 
 namespace MassConverterConsole
 {
+    public enum MassType
+    {
+        Microgram = 1,
+        Miligram = 2,
+        Gram = 3,
+        Kilogram = 4,
+        MetricTon = 5,
+        Ounce = 6,
+        Pound = 7,
+        Stone = 8,
+        UsTon = 9,
+        ImperialTon = 10
+    }
+
     public class MassConverter
     {
         // ================================================== Metric Methods ==================================================
@@ -21,47 +35,48 @@ namespace MassConverterConsole
         public static decimal MiligramToMicrogram(decimal miligram) { return miligram * 1000; }
 
         // Main Metric Conversion Method
-        public static decimal MetricConversions(decimal mass, int startingType, int endingType)
+        public static decimal MetricConversions(decimal mass, MassType startingType, MassType endingType)
         {
-            if (startingType < 1 || startingType > 5) { throw new ArgumentOutOfRangeException("[startingType] should be an integer between 1 and 5."); }
-            if (endingType < 1 || endingType > 5) { throw new ArgumentOutOfRangeException("[endingType] should be an integer between 1 and 5."); }
-            if (startingType == endingType) { return mass; }
+            if (startingType is < (MassType)1 or > (MassType)5) { throw new ArgumentOutOfRangeException("[startingType] should be a [MassType] Enum between 1 and 5."); }
+            if (endingType is < (MassType)1 or > (MassType)5) { throw new ArgumentOutOfRangeException("[endingType] should be a [MassType] Enum between 1 and 5."); }
+            if ((int)startingType == (int)endingType) { return mass; }
             decimal convertedMass = mass;
 
-            if (startingType > endingType)
+            if (startingType < endingType)
             {
-                startingType = -startingType;
-                endingType = -endingType;
+                switch (startingType)
+                {
+                    case MassType.Microgram:
+                        convertedMass = MicrogramToMiligram(convertedMass);
+                        if (endingType == MassType.Miligram) { break; } else { goto case MassType.Miligram; }
+                    case MassType.Miligram:
+                        convertedMass = MiligramToGram(convertedMass);
+                        if (endingType == MassType.Gram) { break; } else { goto case MassType.Gram; }
+                    case MassType.Gram:
+                        convertedMass = GramToKilogram(convertedMass);
+                        if (endingType == MassType.Kilogram) { break; } else { goto case MassType.Kilogram; }
+                    case MassType.Kilogram:
+                        convertedMass = KilogramToMetricTon(convertedMass);
+                        break;
+                }
             }
-
-            switch (startingType)
+            else
             {
-
-                case 1:
-                    convertedMass = MicrogramToMiligram(convertedMass);
-                    if (endingType == 2) { break; } else { goto case 2; }
-                case 2:
-                    convertedMass = MiligramToGram(convertedMass);
-                    if (endingType == 3) { break; } else { goto case 3; }
-                case 3:
-                    convertedMass = GramToKilogram(convertedMass);
-                    if (endingType == 4) { break; } else { goto case 4; }
-                case 4:
-                    convertedMass = KilogramToMetricTon(convertedMass);
-                    break;
-
-                case -5:
-                    convertedMass = MetricTonToKilogram(convertedMass);
-                    if (endingType == -4) { break; } else { goto case -4; }
-                case -4:
-                    convertedMass = KilogramToGram(convertedMass);
-                    if (endingType == -3) { break; } else { goto case -3; }
-                case -3:
-                    convertedMass = GramToMiligram(convertedMass);
-                    if (endingType == -2) { break; } else { goto case -2; }
-                case -2:
-                    convertedMass = MiligramToMicrogram(convertedMass);
-                    break;
+                switch (startingType)
+                {
+                    case MassType.MetricTon:
+                        convertedMass = MetricTonToKilogram(convertedMass);
+                        if (endingType == MassType.Kilogram) { break; } else { goto case MassType.Kilogram; }
+                    case MassType.Kilogram:
+                        convertedMass = KilogramToGram(convertedMass);
+                        if (endingType == MassType.Gram) { break; } else { goto case MassType.Gram; }
+                    case MassType.Gram:
+                        convertedMass = GramToMiligram(convertedMass);
+                        if (endingType == MassType.Miligram) { break; } else { goto case MassType.Miligram; }
+                    case MassType.Miligram:
+                        convertedMass = MiligramToMicrogram(convertedMass);
+                        break;
+                }
             }
 
             return convertedMass;
@@ -80,47 +95,48 @@ namespace MassConverterConsole
         public static decimal PoundToOunce(decimal pound) { return pound * (decimal)16; }
 
         // Main Imperial Conversion Method
-        public static decimal ImperialConversions(decimal mass, int startingType, int endingType)
+        public static decimal ImperialConversions(decimal mass, MassType startingType, MassType endingType)
         {
-            if (startingType < 1 || startingType > 5) { throw new ArgumentOutOfRangeException("[startingType] should be an integer between 1 and 5."); }
-            if (endingType < 1 || endingType > 5) { throw new ArgumentOutOfRangeException("[endingType] should be an integer between 1 and 5."); }
+            if (startingType is < (MassType)6 or > (MassType)10) { throw new ArgumentOutOfRangeException("[startingType] should be a [MassType] Enum between 6 and 10."); }
+            if (endingType is < (MassType)6 or > (MassType)10) { throw new ArgumentOutOfRangeException("[endingType] should be a [MassType] Enum between 6 and 10."); }
             if (startingType == endingType) { return mass; }
             decimal convertedMass = mass;
 
-            if (startingType > endingType)
+            if (startingType < endingType)
             {
-                startingType = -startingType;
-                endingType = -endingType;
+                switch (startingType)
+                {
+                    case MassType.Ounce:
+                        convertedMass = OunceToPound(convertedMass);
+                        if (endingType == MassType.Pound) { break; } else { goto case MassType.Pound; }
+                    case MassType.Pound:
+                        convertedMass = PoundToStone(convertedMass);
+                        if (endingType == MassType.Stone) { break; } else { goto case MassType.Stone; }
+                    case MassType.Stone:
+                        convertedMass = StoneToUsTon(convertedMass);
+                        if (endingType == MassType.UsTon) { break; } else { goto case MassType.UsTon; }
+                    case MassType.UsTon:
+                        convertedMass = UsTonToImperialTon(convertedMass);
+                        break;
+                }
             }
-
-            switch (startingType)
+            else
             {
-
-                case 1:
-                    convertedMass = OunceToPound(convertedMass);
-                    if (endingType == 2) { break; } else { goto case 2; }
-                case 2:
-                    convertedMass = PoundToStone(convertedMass);
-                    if (endingType == 3) { break; } else { goto case 3; }
-                case 3:
-                    convertedMass = StoneToUsTon(convertedMass);
-                    if (endingType == 4) { break; } else { goto case 4; }
-                case 4:
-                    convertedMass = UsTonToImperialTon(convertedMass);
-                    break;
-
-                case -5:
-                    convertedMass = ImperialTonToUsTon(convertedMass);
-                    if (endingType == -4) { break; } else { goto case -4; }
-                case -4:
-                    convertedMass = UsTonToStone(convertedMass);
-                    if (endingType == -3) { break; } else { goto case -3; }
-                case -3:
-                    convertedMass = StoneToPound(convertedMass);
-                    if (endingType == -2) { break; } else { goto case -2; }
-                case -2:
-                    convertedMass = PoundToOunce(convertedMass);
-                    break;
+                switch (startingType)
+                {
+                    case MassType.ImperialTon:
+                        convertedMass = ImperialTonToUsTon(convertedMass);
+                        if (endingType == MassType.UsTon) { break; } else { goto case MassType.UsTon; }
+                    case MassType.UsTon:
+                        convertedMass = UsTonToStone(convertedMass);
+                        if (endingType == MassType.Stone) { break; } else { goto case MassType.Stone; }
+                    case MassType.Stone:
+                        convertedMass = StoneToPound(convertedMass);
+                        if (endingType == MassType.Pound) { break; } else { goto case MassType.Pound; }
+                    case MassType.Pound:
+                        convertedMass = PoundToOunce(convertedMass);
+                        break;
+                }
             }
 
             return convertedMass;
