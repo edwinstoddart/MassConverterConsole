@@ -24,18 +24,18 @@ namespace MassConverterConsole
     {
         // ================================================== Metric Methods ==================================================
         // Ascending Metric Conversion Methods:
-        public static decimal MicrogramToMiligram(decimal microgram) { return microgram / 1000; }
-        public static decimal MiligramToGram(decimal miligram) { return miligram / 1000; }
-        public static decimal GramToKilogram(decimal gram) { return gram / 1000; }
-        public static decimal KilogramToMetricTon(decimal kilogram) { return kilogram / 1000; }
+        private static decimal MicrogramToMiligram(decimal microgram) { return microgram / 1000; }
+        private static decimal MiligramToGram(decimal miligram) { return miligram / 1000; }
+        private static decimal GramToKilogram(decimal gram) { return gram / 1000; }
+        private static decimal KilogramToMetricTon(decimal kilogram) { return kilogram / 1000; }
         // Descending Metric Conversion Methods:
-        public static decimal MetricTonToKilogram(decimal metricTon) { return metricTon * 1000; }
-        public static decimal KilogramToGram(decimal kilogram) { return kilogram * 1000; }
-        public static decimal GramToMiligram(decimal gram) { return gram * 1000; }
-        public static decimal MiligramToMicrogram(decimal miligram) { return miligram * 1000; }
+        private static decimal MetricTonToKilogram(decimal metricTon) { return metricTon * 1000; }
+        private static decimal KilogramToGram(decimal kilogram) { return kilogram * 1000; }
+        private static decimal GramToMiligram(decimal gram) { return gram * 1000; }
+        private static decimal MiligramToMicrogram(decimal miligram) { return miligram * 1000; }
 
         // Main Metric Conversion Method
-        public static decimal MetricConversions(decimal mass, MassType startingType, MassType endingType)
+        private static decimal MetricConversions(decimal mass, MassType startingType, MassType endingType)
         {
             if (startingType is < (MassType)1 or > (MassType)5) { throw new ArgumentOutOfRangeException("[startingType] should be a [MassType] Enum between 1 and 5."); }
             if (endingType is < (MassType)1 or > (MassType)5) { throw new ArgumentOutOfRangeException("[endingType] should be a [MassType] Enum between 1 and 5."); }
@@ -84,18 +84,18 @@ namespace MassConverterConsole
 
         // ================================================== Imperial Methods ==================================================
         // Ascending Imperial Conversion Methods:
-        public static decimal OunceToPound(decimal ounce) { return ounce / (decimal)16; }
-        public static decimal PoundToStone(decimal pound) { return pound / (decimal)14; }
-        public static decimal StoneToUsTon(decimal stone) { return stone / (decimal)142.8571428571; }
-        public static decimal UsTonToImperialTon(decimal usTon) { return usTon / (decimal)1.12; }
+        private static decimal OunceToPound(decimal ounce) { return ounce / (decimal)16; }
+        private static decimal PoundToStone(decimal pound) { return pound / (decimal)14; }
+        private static decimal StoneToUsTon(decimal stone) { return stone * (decimal)0.007; }
+        private static decimal UsTonToImperialTon(decimal usTon) { return usTon / (decimal)1.12; }
         // Descending Imperial Conversion Methods:
-        public static decimal ImperialTonToUsTon(decimal imperialTon) { return imperialTon * (decimal)1.12; }
-        public static decimal UsTonToStone(decimal usTon) { return usTon * (decimal)142.8571428571; }
-        public static decimal StoneToPound(decimal stone) { return stone * (decimal)14; }
-        public static decimal PoundToOunce(decimal pound) { return pound * (decimal)16; }
+        private static decimal ImperialTonToUsTon(decimal imperialTon) { return imperialTon * (decimal)1.12; }
+        private static decimal UsTonToStone(decimal usTon) { return usTon / (decimal)0.007; }
+        private static decimal StoneToPound(decimal stone) { return stone * (decimal)14; }
+        private static decimal PoundToOunce(decimal pound) { return pound * (decimal)16; }
 
         // Main Imperial Conversion Method
-        public static decimal ImperialConversions(decimal mass, MassType startingType, MassType endingType)
+        private static decimal ImperialConversions(decimal mass, MassType startingType, MassType endingType)
         {
             if (startingType is < (MassType)6 or > (MassType)10) { throw new ArgumentOutOfRangeException("[startingType] should be a [MassType] Enum between 6 and 10."); }
             if (endingType is < (MassType)6 or > (MassType)10) { throw new ArgumentOutOfRangeException("[endingType] should be a [MassType] Enum between 6 and 10."); }
@@ -141,7 +141,62 @@ namespace MassConverterConsole
 
             return convertedMass;
         }
-        // TODO: Create methods to convert different measurements of mass between metric and imperial
-        // TODO: Create a master method to freely convert between any two types of mass
+
+        // System To System Conversion Methods
+        private static decimal MetricToImperial(decimal mass, MassType startingType, MassType endingType)
+        {
+            decimal convertedMass = mass;
+
+            convertedMass = MetricConversions(convertedMass, startingType, MassType.Gram);
+            convertedMass /= (decimal)6350.293180000001;
+            convertedMass = ImperialConversions(convertedMass, MassType.Stone, endingType);
+
+            return convertedMass;
+        }
+        private static decimal ImperialToMetric(decimal mass, MassType startingType, MassType endingType)
+        {
+            decimal convertedMass = mass;
+
+            convertedMass = ImperialConversions(convertedMass, startingType, MassType.Stone);
+            convertedMass *= (decimal)6350.293180000001;
+            convertedMass = MetricConversions(convertedMass, MassType.Gram, endingType);
+
+            return convertedMass;
+        }
+
+        // Main Conversion Method
+        public static decimal MainConverter(decimal mass, MassType startingType, MassType endingType)
+        {
+            if (startingType is < (MassType)1 or > (MassType)10) { throw new ArgumentOutOfRangeException("[startingType] should be a [MassType] Enum between 1 and 10."); }
+            if (endingType is < (MassType)1 or > (MassType)10) { throw new ArgumentOutOfRangeException("[endingType] should be a [MassType] Enum between 1 and 10."); }
+            if (startingType == endingType) { return mass; }
+
+            decimal convertedMass = mass;
+
+            if (startingType <= MassType.MetricTon)
+            {
+                if (endingType <= MassType.MetricTon)
+                {
+                    convertedMass = MetricConversions(mass, startingType, endingType);
+                }
+                else
+                {
+                    convertedMass = MetricToImperial(mass, startingType, endingType);
+                }
+            }
+            else
+            {
+                if (endingType <= MassType.MetricTon)
+                {
+                    convertedMass = ImperialToMetric(mass, startingType, endingType);
+                }
+                else
+                {
+                    convertedMass = ImperialConversions(mass, startingType, endingType);
+                }
+            }
+
+            return convertedMass;
+        }
     }
 }
