@@ -118,76 +118,76 @@ namespace MassConverterConsoleTests
 
         // Imperial Conversion Tests: Ascending Unit Conversion
         [TestMethod]
-        public void ImperialConversions_ConvertingOneOunceToPounds_ReturnsPoint()
+        public void ImperialConversions_ConvertingOneOunceToPounds_Returns0Point06250()
         {
             decimal actual = MassConverter.ImperialConversions(1, 1, 2);
 
-            Assert.AreEqual(0.06250, actual);
+            Assert.AreEqual(0.06250, (double)actual, delta);
         }
         [TestMethod]
-        public void ImperialConversions_ConvertingOnePoundToStone_ReturnsPoint()
+        public void ImperialConversions_ConvertingOnePoundToStone_Returns0Point07142()
         {
             decimal actual = MassConverter.ImperialConversions(1, 2, 3);
 
-            Assert.AreEqual(0.07142, actual);
+            Assert.AreEqual(0.07142, (double)actual, delta);
         }
         [TestMethod]
-        public void ImperialConversions_ConvertingOneStoneToUsTons_ReturnsPoint()
+        public void ImperialConversions_ConvertingOneStoneToUsTons_Returns0Point00700()
         {
             decimal actual = MassConverter.ImperialConversions(1, 3, 4);
 
-            Assert.AreEqual(0.00700, actual);
+            Assert.AreEqual(0.007, (double)actual, delta);
         }
         [TestMethod]
-        public void ImperialConversions_ConvertingOneUsTonToImperialTons_ReturnsPoint()
+        public void ImperialConversions_ConvertingOneUsTonToImperialTons_Returns0Point89285()
         {
             decimal actual = MassConverter.ImperialConversions(1, 4, 5);
 
-            Assert.AreEqual(0.89285, actual);
+            Assert.AreEqual(0.89285, (double)actual, delta);
         }
         [TestMethod]
-        public void ImperialConversions_ConvertingOneOunceToImperialTons_ReturnsPoint()
+        public void ImperialConversions_ConvertingOneOunceToImperialTons_Returns0Point00002()
         {
             decimal actual = MassConverter.ImperialConversions(1, 1, 5);
 
-            Assert.AreEqual(0.00002, actual);
+            Assert.AreEqual(0.00002, (double)actual, delta);
         }
 
         // Imperial Conversion Tests: Descending Unit Conversion
         [TestMethod]
-        public void ImperialConversions_ConvertingOneImperialTonToUsTons_Returns()
+        public void ImperialConversions_ConvertingOneImperialTonToUsTons_Returns1Point12()
         {
             decimal actual = MassConverter.ImperialConversions(1, 5, 4);
 
-            Assert.AreEqual(1.12, actual);
+            Assert.AreEqual(1.12, (double)actual, delta);
         }
         [TestMethod]
-        public void ImperialConversions_ConvertingOneUsTonToStone_Returns()
+        public void ImperialConversions_ConvertingOneUsTonToStone_Returns142Point85714()
         {
             decimal actual = MassConverter.ImperialConversions(1, 4, 3);
 
-            Assert.AreEqual(142.857, actual);
+            Assert.AreEqual(142.85714, (double)actual, delta);
         }
         [TestMethod]
-        public void ImperialConversions_ConvertingOneStoneToPounds_Returns()
+        public void ImperialConversions_ConvertingOneStoneToPounds_Returns14()
         {
             decimal actual = MassConverter.ImperialConversions(1, 3, 2);
 
-            Assert.AreEqual(14, actual);
+            Assert.AreEqual(14, (double)actual, delta);
         }
         [TestMethod]
-        public void ImperialConversions_ConvertingOnePoundToOunces_Returns()
+        public void ImperialConversions_ConvertingOnePoundToOunces_Returns16()
         {
             decimal actual = MassConverter.ImperialConversions(1, 2, 1);
 
-            Assert.AreEqual(16, actual);
+            Assert.AreEqual(16, (double)actual, delta);
         }
         [TestMethod]
-        public void ImperialConversions_ConvertingOneImperialTonToOunces_Returns()
+        public void ImperialConversions_ConvertingOneImperialTonToOunces_Returns35839Point99999()
         {
             decimal actual = MassConverter.ImperialConversions(1, 5, 1);
 
-            Assert.AreEqual(35840, actual);
+            Assert.AreEqual(35839.99999, (double)actual, delta);
         }
 
         // Imperial Conversion Tests: Outliers
