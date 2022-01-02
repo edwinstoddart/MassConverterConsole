@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MassConverter
+namespace MassConverterConsole
 {
     class Program
     {
@@ -11,7 +11,7 @@ namespace MassConverter
 
             // Test Code:
             // Variable Library
-            double startingAmount = 1000;   // Altering this amount will change the value being converted in the tests
+            decimal startingAmount = 1000;   // Altering this amount will change the value being converted in the tests
             int measurementSystem = 0;      // Altering this amount will change the system of conversion from metric (0) to imperial (anything else)
             List<Dictionary<string, int>> testCases = new List<Dictionary<string, int>>();
 
