@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MassConverter
 {
@@ -8,20 +9,73 @@ namespace MassConverter
         {
             // TODO: Create a text-based interface for using either sets of calculations
 
-            // Test Statements:
-            double startingAmount = 1;
-            Console.WriteLine(startingAmount + " microgram is: " + MassConverter.MicrogramToMiligram(startingAmount) + " miligrams.");
-            Console.WriteLine(startingAmount + " miligram is: " + MassConverter.MiligramToGram(startingAmount) + " grams.");
-            Console.WriteLine(startingAmount + " gram is: " + MassConverter.GramToKilogram(startingAmount) + " kilograms.");
-            Console.WriteLine(startingAmount + " kilogram is: " + MassConverter.KilogramToMetricTon(startingAmount) + " metric tons.");
+            // Test Code:
+            // Variable Library
+            double startingAmount = 1000;   // Altering this amount will change the value being converted in the tests
+            int measurementSystem = 0;      // Altering this amount will change the system of conversion from metric (0) to imperial (anything else)
+            List<Dictionary<string, int>> testCases = new List<Dictionary<string, int>>();
 
-            Console.WriteLine(startingAmount + " metric ton is: " + MassConverter.MetricTonToKilogram(startingAmount) + " kilograms.");
-            Console.WriteLine(startingAmount + " kilogram is: " + MassConverter.KilogramToGram(startingAmount) + " grams.");
-            Console.WriteLine(startingAmount + " gram is: " + MassConverter.GramToMiligram(startingAmount) + " miligrams.");
-            Console.WriteLine(startingAmount + " miligram is: " + MassConverter.MiligramToMicrogram(startingAmount) + " micrograms.");
+            // Add statements for populating the Dictionary
+            for (int i = 1; i < 5; i++)
+            {
+                testCases.Add(new Dictionary<string, int>
+                {
+                    { "startingMassType", i },
+                    { "endingMassType", i + 1 }
+                });
+            }
+            for (int i = 5; i > 1; i--)
+            {
+                testCases.Add(new Dictionary<string, int>
+                {
+                    { "startingMassType", i },
+                    { "endingMassType", i - 1 }
+                });
+            }
+            testCases.Add(new Dictionary<string, int>
+            {
+                { "startingMassType", 1 },
+                { "endingMassType", 5 }
+            });
+            testCases.Add(new Dictionary<string, int>
+            {
+                { "startingMassType", 5 },
+                { "endingMassType", 1 }
+            });
 
-            Console.WriteLine(startingAmount + " microgram is: " + MassConverter.MetricConversions(startingAmount, 1, 5) + " metric tons.");
-            Console.WriteLine(startingAmount + " metric ton is: " + MassConverter.MetricConversions(startingAmount, 5, 1) + " micrograms.");
+            // Using the test cases to display various tests in a user friendly way.
+            foreach (Dictionary<string, int> test in testCases)
+            {
+                Console.WriteLine($"{startingAmount} {massTypeMetric(test["startingMassType"])} is: " +
+                    $"{(measurementSystem == 0 ? MassConverter.MetricConversions(startingAmount, test["startingMassType"], test["endingMassType"]) : MassConverter.ImperialConversions(startingAmount, test["startingMassType"], test["endingMassType"]))} " +
+                    $"{(measurementSystem == 0 ? massTypeMetric(test["endingMassType"]) : massTypeImperial(test["endingMassType"]))}s.");
+            }
+
+            // Return a string value to determine the type of measurement used in [startingMassType] and [endingMassType]
+            string massTypeMetric(int index)
+            {
+                switch (index)
+                {
+                    case 1: return "microgram";
+                    case 2: return "miligram";
+                    case 3: return "gram";
+                    case 4: return "kilogram";
+                    case 5: return "metric ton";
+                    default: return "Error, number outside of range.";
+                }
+            }
+            string massTypeImperial(int index)
+            {
+                switch (index)
+                {
+                    case 1: return "ounce";
+                    case 2: return "pound";
+                    case 3: return "stone";
+                    case 4: return "US ton";
+                    case 5: return "imperial ton";
+                    default: return "Error, number outside of range.";
+                }
+            }
         }
     }
 }

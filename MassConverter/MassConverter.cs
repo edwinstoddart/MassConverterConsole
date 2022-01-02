@@ -69,6 +69,10 @@ namespace MassConverter
         // TODO: Create methods to convert different measurements of mass in imperial
             // TODO: Create separate methods for converting between: Ounce <-> Pound <-> Stone <-> US Ton <-> Imperial Ton
             // TODO: Create a control method to simplify user input by chaining multiple methods together to convert between one mass to a significantly larger/smaller one
+        public static double ImperialConversions(double mass, int startingType, int endingType)
+        {
+            return 0.0;
+        }
         // TODO: Create methods to convert different measurements of mass between metric and imperial
         // TODO: Create a master method to freely convert between any two types of mass
     }
