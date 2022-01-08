@@ -19,11 +19,11 @@ namespace MassConverterConsole
                 while (startingType == (MassType)0)
                 {
                     Console.WriteLine("Would you please select a number corresponding to the Mass Type you need to convert:\n" +
-                        "1: Microgram    6: Ounce\n" +
-                        "2: Miligram     7: Pound\n" +
-                        "3: Gram         8: Stone\n" +
-                        "4: Kilogram     9: US Ton\n" +
-                        "5: Metric Ton  10: Imperial Ton");
+                        $"1: {MassType.Micrograms}   6: {MassType.Ounces}\n" +
+                        $"2: {MassType.Miligrams}    7: {MassType.Pounds}\n" +
+                        $"3: {MassType.Grams}        8: {MassType.Stone}\n" +
+                        $"4: {MassType.Kilograms}    9: {MassType.UsTons}\n" +
+                        $"5: {MassType.MetricTons}  10: {MassType.ImperialTons}");
                     userEntry = Console.ReadLine();
                     Console.Clear();
 

@@ -18,35 +18,35 @@ namespace MassConverterConsoleTests
         [TestMethod]
         public void MainConverter_WhenConvertingOneMicrogramToMiligrams_Returns0Point001()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.Microgram, MassType.Miligram);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.Micrograms, MassType.Miligrams);
 
             Assert.AreEqual(expectedAscendingConversion, actual);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneMiligramToGrams_Returns0Point001()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.Miligram, MassType.Gram);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.Miligrams, MassType.Grams);
 
             Assert.AreEqual(expectedAscendingConversion, actual);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneGramToKilograms_Returns0Point001()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.Gram, MassType.Kilogram);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.Grams, MassType.Kilograms);
 
             Assert.AreEqual(expectedAscendingConversion, actual);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneKilogramToMetricTons_Returns0Point001()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.Kilogram, MassType.MetricTon);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.Kilograms, MassType.MetricTons);
 
             Assert.AreEqual(expectedAscendingConversion, actual);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneMicrogramToMetricTons_Returns0Point001()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.Microgram, MassType.MetricTon);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.Micrograms, MassType.MetricTons);
 
             Assert.AreEqual(expectedMin, actual);
         }
@@ -55,35 +55,35 @@ namespace MassConverterConsoleTests
         [TestMethod]
         public void MainConverter_WhenConvertingOneMetricTonToKilograms_Returns1000()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.MetricTon, MassType.Kilogram);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.MetricTons, MassType.Kilograms);
 
             Assert.AreEqual(expectedDescendingConversion, actual);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneKilogramToGrams_Returns1000()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.Kilogram, MassType.Gram);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.Kilograms, MassType.Grams);
 
             Assert.AreEqual(expectedDescendingConversion, actual);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneGramToMiligrams_Returns1000()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.Gram, MassType.Miligram);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.Grams, MassType.Miligrams);
 
             Assert.AreEqual(expectedDescendingConversion, actual);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneMiligramToMicrograms_Returns1000()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.Miligram, MassType.Microgram);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.Miligrams, MassType.Micrograms);
 
             Assert.AreEqual(expectedDescendingConversion, actual);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneMetricTonToMicrograms_Returns1000000000000()
         {
-            decimal actual = MassConverter.MainConverter(testMass, MassType.MetricTon, MassType.Microgram);
+            decimal actual = MassConverter.MainConverter(testMass, MassType.MetricTons, MassType.Micrograms);
 
             Assert.AreEqual(expectedMax, actual);
         }
@@ -99,35 +99,35 @@ namespace MassConverterConsoleTests
         [TestMethod]
         public void MainConverter_WhenConvertingOneOunceToPounds_Returns0Point06250()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.Ounce, MassType.Pound);
+            decimal actual = MassConverter.MainConverter(1, MassType.Ounces, MassType.Pounds);
 
             Assert.AreEqual(0.06250, (double)actual, delta);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOnePoundToStone_Returns0Point07142()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.Pound, MassType.Stone);
+            decimal actual = MassConverter.MainConverter(1, MassType.Pounds, MassType.Stone);
 
             Assert.AreEqual(0.07142, (double)actual, delta);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneStoneToUsTons_Returns0Point007()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.Stone, MassType.UsTon);
+            decimal actual = MassConverter.MainConverter(1, MassType.Stone, MassType.UsTons);
 
             Assert.AreEqual(0.007, (double)actual, delta);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneUsTonToImperialTons_Returns0Point89285()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.UsTon, MassType.ImperialTon);
+            decimal actual = MassConverter.MainConverter(1, MassType.UsTons, MassType.ImperialTons);
 
             Assert.AreEqual(0.89285, (double)actual, delta);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneOunceToImperialTons_Returns0Point00002()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.Ounce, MassType.ImperialTon);
+            decimal actual = MassConverter.MainConverter(1, MassType.Ounces, MassType.ImperialTons);
 
             Assert.AreEqual(0.00002, (double)actual, delta);
         }
@@ -136,35 +136,35 @@ namespace MassConverterConsoleTests
         [TestMethod]
         public void MainConverter_WhenConvertingOneImperialTonToUsTons_Returns1Point12()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.ImperialTon, MassType.UsTon);
+            decimal actual = MassConverter.MainConverter(1, MassType.ImperialTons, MassType.UsTons);
 
             Assert.AreEqual(1.12, (double)actual, delta);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneUsTonToStone_Returns142Point85714()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.UsTon, MassType.Stone);
+            decimal actual = MassConverter.MainConverter(1, MassType.UsTons, MassType.Stone);
 
             Assert.AreEqual(142.85714, (double)actual, delta);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneStoneToPounds_Returns14()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.Stone, MassType.Pound);
+            decimal actual = MassConverter.MainConverter(1, MassType.Stone, MassType.Pounds);
 
             Assert.AreEqual(14, (double)actual, delta);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOnePoundToOunces_Returns16()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.Pound, MassType.Ounce);
+            decimal actual = MassConverter.MainConverter(1, MassType.Pounds, MassType.Ounces);
 
             Assert.AreEqual(16, (double)actual, delta);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneImperialTonToOunces_Returns35840()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.ImperialTon, MassType.Ounce);
+            decimal actual = MassConverter.MainConverter(1, MassType.ImperialTons, MassType.Ounces);
 
             Assert.AreEqual(35840, (double)actual, delta);
         }
@@ -180,14 +180,14 @@ namespace MassConverterConsoleTests
         [TestMethod]
         public void MainConverter_WhenConvertingOneMicrogramToImperialTons_Returns9Point84EMinus13()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.Microgram, MassType.ImperialTon);
+            decimal actual = MassConverter.MainConverter(1, MassType.Micrograms, MassType.ImperialTons);
 
             Assert.AreEqual(9.84E-13, (double)actual, 1E-15);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneOunceToMetricTons_Returns0Point00002()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.Ounce, MassType.MetricTon);
+            decimal actual = MassConverter.MainConverter(1, MassType.Ounces, MassType.MetricTons);
 
             Assert.AreEqual(0.00002, (double)actual, delta);
         }
@@ -196,14 +196,14 @@ namespace MassConverterConsoleTests
         [TestMethod]
         public void MainConverter_WhenConvertingOneMetricTonToOunces_Returns35273Point96195()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.MetricTon, MassType.Ounce);
+            decimal actual = MassConverter.MainConverter(1, MassType.MetricTons, MassType.Ounces);
 
             Assert.AreEqual(35273.96194, (double)actual, delta);
         }
         [TestMethod]
         public void MainConverter_WhenConvertingOneImperialTonToMicrograms_Returns1016046908800()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.ImperialTon, MassType.Microgram);
+            decimal actual = MassConverter.MainConverter(1, MassType.ImperialTons, MassType.Micrograms);
 
             Assert.AreEqual(1016046908800, (double)actual, delta);
         }
@@ -212,7 +212,7 @@ namespace MassConverterConsoleTests
         [TestMethod]
         public void MainConverter_WhenConvertingOneOfACertainTypeToItself_Returns1()
         {
-            decimal actual = MassConverter.MainConverter(1, MassType.Gram, MassType.Gram);
+            decimal actual = MassConverter.MainConverter(1, MassType.Grams, MassType.Grams);
 
             Assert.AreEqual(1, actual);
         }
