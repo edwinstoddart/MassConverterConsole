@@ -1,14 +1,14 @@
 # Mass Converter Console Edition
 
 ## Table of contents:
-## Introduction
-###### Technologies
-###### Launch
-###### Scope of functionalities
-###### Examples of use
-###### Project status
-###### Sources
-###### Other information
+Introduction
+Technologies
+Launch
+Scope of functionalities
+Examples of use
+Project status
+Sources
+Other information
 
 ## Introduction
 This is a simple console application for converting weight between the Imperial and Metric systems of measurement. It uses Unit Testing as living documentation for the program.
