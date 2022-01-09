@@ -1,7 +1,7 @@
 # Mass Converter Console Edition
 
 ## Table of contents:
-###### Introduction
+## Introduction
 ###### Technologies
 ###### Launch
 ###### Scope of functionalities
